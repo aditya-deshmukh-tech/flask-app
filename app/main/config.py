@@ -14,7 +14,7 @@ class DevelopmentConfig(Config):
     # uncomment the line below to use postgres
     # SQLALCHEMY_DATABASE_URI = postgres_local_base
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:adisql@localhost/registry'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:adisql@localhost:3306/registry'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
@@ -30,7 +30,7 @@ class ProductionConfig(Config):
     DEBUG = False
     # uncomment the line below to use postgres
     # SQLALCHEMY_DATABASE_URI = postgres_local_base
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:adisql@localhost/registry'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:adisql@localhost:3306/registry'
 
 
 config_by_name = dict(

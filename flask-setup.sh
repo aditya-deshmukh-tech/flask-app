@@ -1,15 +1,13 @@
 mkdir app
 touch requirements.txt
-cat <<EOF > wsgi.py
-import os
 
+cat <<EOF > wsgi.py
 from app.main import create_app
 
-app = create_app(os.getenv('BOILERPLATE_ENV') or 'dev')
-
-app.app_context().push()
 
 if __name__ == '__main__':
+    app = create_app('dev')
+    app.app_context().push()
     app.run()
 else:
     gunicorn_app = create_app('prod')
@@ -19,13 +17,13 @@ touch __init__.py
 mkdir main
 mkdir test
 cd main
+
 cat <<EOF > __init__.py
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from .dbservice import db
 
 from .config import config_by_name
 
-db = SQLAlchemy()
 
 
 def create_app(config_name):
@@ -33,8 +31,10 @@ def create_app(config_name):
     app.config.from_object(config_by_name[config_name])
     db.init_app(app)
 
+
     return app
 EOF
+
 cat <<EOF > config.py
 import os
 
@@ -67,7 +67,7 @@ class TestingConfig(Config):
 class ProductionConfig(Config):
     DEBUG = False
     # uncomment the line below to use postgres
-    # SQLALCHEMY_DATABASE_URI = postgres_local_base
+    # SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
 
 
 config_by_name = dict(
@@ -78,6 +78,16 @@ config_by_name = dict(
 
 key = Config.SECRET_KEY
 EOF
+
+mkdir dbservice
+cd dbservice
+
+cat <<EOF > __init__.py
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+EOF
+cd ..
 cd ..
 cd test
 touch __init__.py
