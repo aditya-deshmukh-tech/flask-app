@@ -37,27 +37,3 @@ i have seen a lot of structure for flask but what i use for this project found t
 But creating this structure from scratch again for new project is kind of hard to remember so thats why i created one ``flask-setup.sh`` script which will automatically create basic flask structure for me
 
 ```./flask-setup.sh```
-
-# Using Docker Mysql image for this project
-For developement of this project i need mysql database, but for that isnatlling one is not good option if we have docker service now os lets use docker image of mysql for this project
-
-## Pull mysql docker image
-
-```docker pull mysql/mysql-server```
-
-## Now start mysql container for use
-
-```docker run --name mysql1 mysql/mysql-server```
-
-## Now go inside mysql cli
-
-```docker exec -it mysql1 mysql -uroot -p```
-
-ones this command run it will ask you generated password for 1st time starting of mysql. This password can be found in logs of mysql running server as GENERATED PASSWORD field
-
-## Once you enter into mysql cli after password you need to first alter your password 
-
-```alter user 'root'@'localhost' identified by 'password';```
-
-## Now create database
-```create database database_name;```
