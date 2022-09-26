@@ -15,4 +15,11 @@ class User(db.Model):
             'last_name' : self.last_name,
             'adhar_id' : self.adhar_id
         }
+    
+    def from_json(self, data):
+        self.adhar_id = data["adhar_id"]
+        self.first_name = data["first_name"]
+        self.last_name = data["last_name"]
+        self.username = data["username"]
+        return self
 

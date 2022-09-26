@@ -7,7 +7,6 @@ from app.main import create_app
 
 if __name__ == '__main__':
     app = create_app('dev')
-    app.app_context().push()
     app.run()
 else:
     gunicorn_app = create_app('prod')
@@ -30,7 +29,8 @@ def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config_by_name[config_name])
     db.init_app(app)
-
+    app.app_context().push()
+    # db.create_all() #need first time only for initialising tables
 
     return app
 EOF

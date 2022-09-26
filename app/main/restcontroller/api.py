@@ -1,9 +1,15 @@
-from flask import Blueprint, jsonify
-from ..models.user import User
+from crypt import methods
+from flask import Blueprint, jsonify, request
+from ..dbservice.userdao import UserDao
 
 api = Blueprint('api',__name__)
 
 @api.route("/all")
 def get_all_users():
-    users = User.query.all()
-    return jsonify([user.to_json() for user in users])
+    return UserDao().get_all()
+
+@api.route("/new", methods=["POST"])
+def add_new():
+    data = request.get_json()
+    UserDao().add_to_db(data)
+    return "added"

@@ -14,7 +14,9 @@ class DevelopmentConfig(Config):
     # uncomment the line below to use postgres
     # SQLALCHEMY_DATABASE_URI = postgres_local_base
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:adisql@localhost:3306/registry'
+    # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'flask_boilerplate_dev.db')
+    SQLALCHEMY_DATABASE_URI = 'mysql://sql6522319:uVrB5VdiJ6@sql6.freesqldatabase.com:3306/sql6522319'
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
