@@ -11,7 +11,7 @@ class UserDao():
             db.session.commit()
             return {"success" : "data added"}
         except Exception as e:
-            return {"err": str(e)}
+            return {"err": str(e.__cause__)}
     
     def get_all(self):
         try:

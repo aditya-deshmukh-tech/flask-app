@@ -15,8 +15,8 @@ def get_one(id):
 @api.route("/new", methods=["POST"])
 def add_new():
     data = request.get_json()
-    UserDao().add_to_db(data)
-    return "added"
+    return UserDao().add_to_db(data)
+    
 
 @api.route("/update", methods=["PUT"])
 def update_one():
